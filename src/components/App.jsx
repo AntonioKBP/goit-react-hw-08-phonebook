@@ -9,6 +9,9 @@ import {
   deleteContactsThunk,
 } from 'redux/users/users.thunk';
 
+import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+
 import {
   // userAddAction,
   // userDeleteAction,
@@ -25,12 +28,17 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 
+import { AppBar } from './AppBar/AppBar';
+
 import {
   Main,
   MainTitle,
   SecondartTitle,
   LoadingTitle,
 } from './TitleAndMainStyled/TitleAndMainStyled.styled';
+import Layout from './Layout/Layout';
+import { LoginForm } from './pages/LoginForm/LoginForm';
+import { SignUpForm } from './pages/SignUpForm/SignUpForm';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -80,15 +88,22 @@ export const App = () => {
 
   return (
     <Main>
-      <MainTitle>PhoneBook</MainTitle>
-      <ContactForm onSubmit={addUser} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/sign-up" element={<SignUpForm />} />
+        </Route>
+        {/* <MainTitle>PhoneBook</MainTitle> */}
 
-      <SecondartTitle>Contacts</SecondartTitle>
-      <Filter filterValue={filter} onSearch={handleSearch} />
-      {isLoading && <LoadingTitle>Processing your request...</LoadingTitle>}
-      {contactsLenght > 0 && (
-        <ContactList users={contacts} onDeleteContact={handleDeleteContact} />
-      )}
+        {/* <ContactForm onSubmit={addUser} />
+
+        <SecondartTitle>Contacts</SecondartTitle>
+        <Filter filterValue={filter} onSearch={handleSearch} />
+        {isLoading && <LoadingTitle>Processing your request...</LoadingTitle>}
+        {contactsLenght > 0 && (
+          <ContactList users={contacts} onDeleteContact={handleDeleteContact} />
+        )} */}
+      </Routes>
     </Main>
   );
 };
