@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { Notify } from 'notiflix';
 
 const initState = {
   email: '',
@@ -7,56 +9,76 @@ const initState = {
 };
 
 export const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState(initState);
+  const [isPsw, setIsPsw] = useState(false);
 
   const handleChange = e => {
     const { value, name } = e.target;
     setValues(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+
+    try {
+      setIsLoading(true);
+      await axios.post(
+        'https://connections-api.herokuapp.com/users/signup',
+        values
+      );
+      setIsLoading(false);
+      Notify.success('Success');
+    } catch (error) {
+      Notify.warning('Something went wrong');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Sign up page</h1>
+    <>
+      {' '}
+      {isLoading && <p>Loading</p>}
+      <form onSubmit={handleSubmit}>
+        <h1>Sign up page</h1>
 
-      <div>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={values.name}
-          onChange={handleChange}
-          //   className="form-control"
-        />
-        <label htmlFor="email">Name</label>
-      </div>
+        <div>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={values.name}
+            onChange={handleChange}
+          />
+          <label htmlFor="email">Name</label>
+        </div>
 
-      <div>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={values.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="email">Email</label>
-      </div>
+        <div>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+          />
+          <label htmlFor="email">Email</label>
+        </div>
 
-      <div>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Password</label>
-      </div>
+        <div>
+          <input
+            id="password"
+            type={isPsw ? 'password' : 'text'}
+            name="password"
+            value={values.password}
+            onChange={handleChange}
+          />
+          <label htmlFor="password">Password</label>
+          <button type="button" onClick={() => setIsPsw(prev => !prev)}>
+            show password
+          </button>
+        </div>
 
-      <button>Submit</button>
-    </form>
+        <button type="submit">Sign In</button>
+      </form>
+    </>
   );
 };
