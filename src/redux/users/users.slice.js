@@ -3,13 +3,13 @@ import {
   deleteContactsThunk,
   addContactsThunk,
 } from './users.thunk';
-import { initState } from './users.init-state';
+import { usersInitState } from './users.init-state';
 
 import { createSlice } from '@reduxjs/toolkit';
 
 const phoneBookSlice = createSlice({
   name: 'contacts',
-  initialState: initState,
+  initialState: usersInitState,
   reducers: {
     // userAddAction: (state, { payload }) => {
     //   state.contacts = [payload, ...state.contacts];

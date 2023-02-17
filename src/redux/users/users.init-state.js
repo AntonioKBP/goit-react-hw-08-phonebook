@@ -1,4 +1,4 @@
-export const initState = {
+export const usersInitState = {
   contacts: {
     items: [],
     isLoading: false,

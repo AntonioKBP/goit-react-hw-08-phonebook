@@ -2,8 +2,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import { devToolsEnhancer } from '@redux-devtools/extension';
 // import { phoneBookReducer } from './users/users.reducer';
-import { initState } from './users/users.init-state';
+import { usersInitState } from './users/users.init-state';
+import { authInitState } from './auth/auth.init-state';
 import { phoneBookReducer } from './users/users.slice';
+import { authReducer } from './auth/auth-slice';
 import {
   FLUSH,
   REHYDRATE,
@@ -25,10 +27,18 @@ import {
 
 // export const store = createStore(phoneBookReducer, initState, enhancer);
 
+const initState = {
+  contacts: usersInitState,
+  auth: authInitState,
+};
+
 export const store = configureStore({
   devTools: true,
   preloadedState: initState,
-  reducer: phoneBookReducer,
+  reducer: {
+    contacts: phoneBookReducer,
+    auth: authReducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
