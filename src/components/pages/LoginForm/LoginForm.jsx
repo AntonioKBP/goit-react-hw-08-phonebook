@@ -16,6 +16,7 @@ export const LoginForm = () => {
 
   const dispatch = useDispatch();
   const loading = useSelector(selectAuthLoading);
+  console.log(loading);
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -26,7 +27,7 @@ export const LoginForm = () => {
     e.preventDefault();
     try {
       const { data } = await dispatch(authLoginThunk(values)).unwrap();
-      console.log(data);
+
       Notify.success('Loginned successfuly');
     } catch (error) {
       Notify.warning('Wrong email or password');
