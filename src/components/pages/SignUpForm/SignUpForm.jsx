@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Notify } from 'notiflix';
+import { publicApi } from 'components/http/http';
 
 const initState = {
   email: '',
@@ -23,10 +24,7 @@ export const SignUpForm = () => {
 
     try {
       setIsLoading(true);
-      await axios.post(
-        'https://connections-api.herokuapp.com/users/signup',
-        values
-      );
+      await publicApi.post('/users/signup', values);
       setIsLoading(false);
       Notify.success('Success');
     } catch (error) {

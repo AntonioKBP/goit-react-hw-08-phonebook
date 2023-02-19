@@ -45,7 +45,6 @@ export const App = () => {
   // const filter = useSelector(selectFilterContacts);
   // const contacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectIsLoading);
-  const token = useSelector(selectAuthToken);
 
   // useEffect(() => {
   //   dispatch(getContactsThunk());

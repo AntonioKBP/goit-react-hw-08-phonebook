@@ -1,2 +1,2 @@
 export const selectAuthLoading = state => state.auth.isLoading;
-export const selectAuthToken = state => state.auth.data.token;
+export const selectAuthToken = state => state.auth.data;

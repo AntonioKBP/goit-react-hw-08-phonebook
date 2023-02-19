@@ -3,6 +3,7 @@ import { Notify } from 'notiflix';
 import { useDispatch, useSelector } from 'react-redux';
 import { authLoginThunk } from 'redux/auth/auth.thunk';
 import { selectAuthLoading } from 'redux/auth/auth-selectors';
+import { useNavigate } from 'react-router-dom';
 
 const initState = {
   email: '',
@@ -16,6 +17,7 @@ export const LoginForm = () => {
 
   const dispatch = useDispatch();
   const loading = useSelector(selectAuthLoading);
+  const navigate = useNavigate();
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -28,16 +30,15 @@ export const LoginForm = () => {
       const { data } = await dispatch(authLoginThunk(values)).unwrap();
 
       Notify.success('Loginned successfuly');
-      reset();
+      navigate('/', { replace: true });
     } catch (error) {
       Notify.warning('Wrong email or password');
-      reset();
     }
   };
-  const reset = () => {
-    values.email = '';
-    values.password = '';
-  };
+  // const reset = () => {
+  //   values.email = '';
+  //   values.password = '';
+  // };
 
   console.log(values);
 
