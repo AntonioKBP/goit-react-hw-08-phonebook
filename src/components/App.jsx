@@ -1,5 +1,6 @@
 // import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectAuthToken } from 'redux/auth/auth-selectors';
 // import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
 import PropTypes from 'prop-types';
@@ -44,6 +45,7 @@ export const App = () => {
   // const filter = useSelector(selectFilterContacts);
   // const contacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectIsLoading);
+  const token = useSelector(selectAuthToken);
 
   // useEffect(() => {
   //   dispatch(getContactsThunk());

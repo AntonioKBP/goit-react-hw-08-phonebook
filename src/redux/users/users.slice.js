@@ -1,3 +1,6 @@
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 import {
   getContactsThunk,
   deleteContactsThunk,
@@ -64,4 +67,12 @@ const phoneBookSlice = createSlice({
 export const { userAddAction, userDeleteAction, contactsFilterAction } =
   phoneBookSlice.actions;
 
-export const phoneBookReducer = phoneBookSlice.reducer;
+const persistConfig = {
+  key: 'contacts',
+  storage,
+};
+
+export const phoneBookReducer = persistReducer(
+  persistConfig,
+  phoneBookSlice.reducer
+);

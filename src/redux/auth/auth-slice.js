@@ -1,3 +1,6 @@
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 import { createSlice } from '@reduxjs/toolkit';
 import { authInitState } from './auth.init-state';
 import { authLoginThunk } from './auth.thunk';
@@ -25,4 +28,10 @@ const authSlice = createSlice({
   },
 });
 
-export const authReducer = authSlice.reducer;
+const persistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['data'],
+};
+
+export const authReducer = persistReducer(persistConfig, authSlice.reducer);

@@ -7,6 +7,7 @@ import { authInitState } from './auth/auth.init-state';
 import { phoneBookReducer } from './users/users.slice';
 import { authReducer } from './auth/auth-slice';
 import {
+  persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -47,7 +48,7 @@ export const store = configureStore({
     }),
 });
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
 // const contactsReducer = (state = [], action) => {};
 
