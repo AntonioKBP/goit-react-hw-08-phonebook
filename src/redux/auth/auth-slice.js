@@ -3,7 +3,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { createSlice } from '@reduxjs/toolkit';
 import { authInitState } from './auth.init-state';
-import { authLoginThunk } from './auth.thunk';
+import { authLoginThunk, authLogoutThunk } from './auth.thunk';
 
 // axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -24,6 +24,13 @@ const authSlice = createSlice({
       .addCase(authLoginThunk.rejected, (state, { error }) => {
         state.isLoading = false;
         state.error = error.message;
+      })
+      .addCase(authLogoutThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(authLogoutThunk.fulfilled, state => {
+        state.isLoading = false;
+        state.data = null;
       });
   },
 });

@@ -4,8 +4,10 @@ import { configureStore } from '@reduxjs/toolkit';
 // import { phoneBookReducer } from './users/users.reducer';
 import { usersInitState } from './users/users.init-state';
 import { authInitState } from './auth/auth.init-state';
+import { profileInitState } from './profile/profile.init-state';
 import { phoneBookReducer } from './users/users.slice';
 import { authReducer } from './auth/auth-slice';
+import { profileReducer } from './profile/profile.slice';
 import {
   persistStore,
   FLUSH,
@@ -31,6 +33,7 @@ import {
 const initState = {
   contacts: usersInitState,
   auth: authInitState,
+  profile: profileInitState,
 };
 
 export const store = configureStore({
@@ -39,6 +42,7 @@ export const store = configureStore({
   reducer: {
     contacts: phoneBookReducer,
     auth: authReducer,
+    profile: profileReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
