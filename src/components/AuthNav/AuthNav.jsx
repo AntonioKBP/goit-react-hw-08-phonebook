@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthToken } from 'redux/auth/auth-selectors';
 import { useEffect } from 'react';
@@ -10,6 +10,8 @@ export const AuthNav = () => {
   const token = useSelector(selectAuthToken);
   const dispatch = useDispatch();
   const profile = useSelector(selectProfile);
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (token) {
       dispatch(getProfileThunk());
@@ -18,6 +20,7 @@ export const AuthNav = () => {
 
   const handleLogOut = () => {
     dispatch(authLogoutThunk());
+    navigate('/', { replace: true });
   };
 
   return (
@@ -28,15 +31,16 @@ export const AuthNav = () => {
           <>
             <h2>Welcome Back{profile.name}</h2>
             <button onClick={handleLogOut}>Log Out</button>
+            <NavLink to={'/contacts'}>Contacts</NavLink>
           </>
         )}
         {token ? (
           <></>
         ) : (
           <>
+            <NavLink to={'/'}>Home</NavLink>
             <NavLink to={'sign-up'}>Sign Up</NavLink>
             <NavLink to={'login'}>Login</NavLink>
-            <NavLink to={'/'}>Home</NavLink>
           </>
         )}
       </div>

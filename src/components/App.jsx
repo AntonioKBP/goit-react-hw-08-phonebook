@@ -39,6 +39,7 @@ import {
 import Layout from './Layout/Layout';
 import { LoginForm } from './pages/LoginForm/LoginForm';
 import { SignUpForm } from './pages/SignUpForm/SignUpForm';
+import { Contacts } from './pages/Contacts/Contacts';
 
 export const App = () => {
   // const dispatch = useDispatch();
@@ -92,17 +93,8 @@ export const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/sign-up" element={<SignUpForm />} />
+          <Route path="/contacts" element={<Contacts />} />
         </Route>
-        {/* <MainTitle>PhoneBook</MainTitle> */}
-
-        {/* <ContactForm onSubmit={addUser} />
-
-        <SecondartTitle>Contacts</SecondartTitle>
-        <Filter filterValue={filter} onSearch={handleSearch} />
-        {isLoading && <LoadingTitle>Processing your request...</LoadingTitle>}
-        {contactsLenght > 0 && (
-          <ContactList users={contacts} onDeleteContact={handleDeleteContact} />
-        )} */}
       </Routes>
     </Main>
   );
