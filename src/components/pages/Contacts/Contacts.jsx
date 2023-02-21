@@ -28,15 +28,6 @@ import {
   selectFilteredContacts,
 } from 'redux/contacts/contacts.selectors';
 
-const InitState = {
-  contacts: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
-  filter: '',
-};
-
 export const Contacts = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilterContacts);
