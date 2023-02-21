@@ -2,12 +2,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import { devToolsEnhancer } from '@redux-devtools/extension';
 // import { phoneBookReducer } from './users/users.reducer';
-import { usersInitState } from './users/users.init-state';
+import { contactsInitState } from './contacts/contacts.init-state';
 import { authInitState } from './auth/auth.init-state';
 import { profileInitState } from './profile/profile.init-state';
-import { phoneBookReducer } from './users/users.slice';
+import { phoneBookReducer } from './contacts/contacts.slice';
 import { authReducer } from './auth/auth-slice';
 import { profileReducer } from './profile/profile.slice';
+
 import {
   persistStore,
   FLUSH,
@@ -31,10 +32,12 @@ import {
 // export const store = createStore(phoneBookReducer, initState, enhancer);
 
 const initState = {
-  contacts: usersInitState,
+  contacts: contactsInitState,
   auth: authInitState,
   profile: profileInitState,
 };
+
+console.log(initState);
 
 export const store = configureStore({
   devTools: true,

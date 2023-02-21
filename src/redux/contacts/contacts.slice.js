@@ -5,14 +5,14 @@ import {
   getContactsThunk,
   deleteContactsThunk,
   addContactsThunk,
-} from './users.thunk';
-import { usersInitState } from './users.init-state';
+} from './contacts.thunk';
+import { contactsInitState } from './contacts.init-state';
 
 import { createSlice } from '@reduxjs/toolkit';
 
 const phoneBookSlice = createSlice({
   name: 'contacts',
-  initialState: usersInitState,
+  initialState: contactsInitState,
   reducers: {
     // userAddAction: (state, { payload }) => {
     //   state.contacts = [payload, ...state.contacts];

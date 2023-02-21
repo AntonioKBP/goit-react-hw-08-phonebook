@@ -1,13 +1,13 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 export const selectFilterContacts = state => {
-  return state.filter;
+  return state.contacts.filter;
 };
 export const selectContacts = state => {
-  return state.contacts.items;
+  return state.contacts.contacts.items;
 };
 export const selectIsLoading = state => {
-  return state.contacts.isLoading;
+  return state.contacts.contacts.isLoading;
 };
 
 // this selector wil trigger rerendering on every input tap in search input,
@@ -25,7 +25,7 @@ export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilterContacts], // array of selectors
   (contacts, filter) => {
     // function witch will be memomized
-    return contacts.filter(contact =>
+    return contacts?.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   }

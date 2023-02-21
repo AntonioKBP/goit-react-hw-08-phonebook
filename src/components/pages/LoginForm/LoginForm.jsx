@@ -18,6 +18,7 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectAuthLoading);
   const navigate = useNavigate();
+  console.log(loading);
 
   const handleChange = e => {
     const { value, name } = e.target;
