@@ -11,6 +11,7 @@ const initState = {
 };
 
 export const LoginForm = () => {
+  // eslint-disable-next-line
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState(initState);
   const [isPsw, setIsPsw] = useState(false);
@@ -28,6 +29,7 @@ export const LoginForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
+      // eslint-disable-next-line
       const { data } = await dispatch(authLoginThunk(values)).unwrap();
 
       Notify.success('Loginned successfuly');
