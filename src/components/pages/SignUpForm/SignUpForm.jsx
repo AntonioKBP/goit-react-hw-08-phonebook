@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { Notify } from 'notiflix';
 import { publicApi } from 'components/http/http';

@@ -11,7 +11,6 @@ const initState = {
 };
 
 export const LoginForm = () => {
-  // eslint-disable-next-line
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState(initState);
   const [isPsw, setIsPsw] = useState(false);
@@ -34,6 +33,7 @@ export const LoginForm = () => {
 
       Notify.success('Loginned successfuly');
       navigate('/', { replace: true });
+      setIsLoading(false);
     } catch (error) {
       Notify.warning('Wrong email or password');
     }
