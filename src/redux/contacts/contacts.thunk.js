@@ -11,8 +11,8 @@ export const getContactsThunk = createAsyncThunk('contacts', async () => {
 
 export const addContactsThunk = createAsyncThunk(
   'contacts/addContact',
-  async ({ id, name, phone }) => {
-    const { data } = await privateApi.post('/contacts', { id, name, phone });
+  async newAbonent => {
+    const { data } = await privateApi.post('/contacts', newAbonent);
 
     return data;
   }
@@ -21,9 +21,7 @@ export const addContactsThunk = createAsyncThunk(
 export const deleteContactsThunk = createAsyncThunk(
   'contacts/deleteContact',
   async id => {
-    const { data } = await axios.delete(
-      `https://63e666537eef5b22338523c9.mockapi.io/api/contacts-list/contacts/${id}`
-    );
+    const { data } = await privateApi.delete(`/contacts/${id}`);
 
     return data;
   }
