@@ -10,8 +10,13 @@ export const getProfileThunk = createAsyncThunk(
     if (!stateToken) {
       return rejectWithValue();
     }
-    token.set(`${stateToken.token}`);
-    const { data } = await privateApi.get('/users/current');
-    return data;
+
+    try {
+      token.set(`${stateToken.token}`);
+      const { data } = await privateApi.get('/users/current');
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
