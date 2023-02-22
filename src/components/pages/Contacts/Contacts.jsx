@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useEffect } from 'react';
 
+import { contactsFilterAction } from 'redux/contacts/contacts.slice';
+
 import {
   Main,
   MainTitle,
@@ -59,17 +61,14 @@ export const Contacts = () => {
   };
 
   const handleSearch = e => {
-    // dispatch(contactsFilterAction(e.target.value));
+    dispatch(contactsFilterAction(e.target.value));
   };
 
   const handleDeleteContact = contactId => {
     dispatch(deleteContactsThunk(contactId));
   };
 
-  const contactsLenght = contacts?.length;
-  const newUsers = contacts?.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  const contactsLenght = contacts.length;
 
   return (
     <>
@@ -77,7 +76,7 @@ export const Contacts = () => {
         <MainTitle>PhoneBook</MainTitle>
         <ContactForm onSubmit={addUser} />
         <SecondartTitle>Contacts</SecondartTitle>
-        <Filter filterValue={newUsers} onSearch={handleSearch} />
+        <Filter filterValue={filter} onSearch={handleSearch} />
         {isLoading && <LoadingTitle>Processing your request...</LoadingTitle>}
         {contactsLenght > 0 && (
           <ContactList users={contacts} onDeleteContact={handleDeleteContact} />
