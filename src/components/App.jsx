@@ -10,17 +10,25 @@ import Layout from './Layout/Layout';
 import { LoginForm } from './pages/LoginForm/LoginForm';
 import { SignUpForm } from './pages/SignUpForm/SignUpForm';
 import { Contacts } from './pages/Contacts/Contacts';
+import { PublicRoute } from './AuthRoutes/PublicRoute';
+import { RestrictedRoute } from './AuthRoutes/RestrictedRoute';
 
 export const App = () => {
   return (
     <Main>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/sign-up" element={<SignUpForm />} />
-          <Route path="/contacts" element={<Contacts />} />
-        </Route>
-      </Routes>
+      <Layout>
+        <Routes>
+          {/* <Route path="/" element={<Layout />}></Route> */}
+          <Route path="" element={<PublicRoute />}>
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/sign-up" element={<SignUpForm />} />
+          </Route>
+
+          <Route path="/" element={<RestrictedRoute />}>
+            <Route path="/contacts" element={<Contacts />} />
+          </Route>
+        </Routes>
+      </Layout>
     </Main>
   );
 };

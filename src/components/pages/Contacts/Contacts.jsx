@@ -36,12 +36,9 @@ export const Contacts = () => {
   const contacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectIsLoading);
 
-  console.log(isLoading);
-  console.log(isLoading);
-
   useEffect(() => {
     dispatch(getContactsThunk());
-  }, [dispatch]);
+  }, []);
 
   const addUser = data => {
     const findExistsName = contacts?.some(

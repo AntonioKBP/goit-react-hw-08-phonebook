@@ -37,8 +37,6 @@ const initState = {
   profile: profileInitState,
 };
 
-console.log(initState);
-
 export const store = configureStore({
   devTools: true,
   preloadedState: initState,
