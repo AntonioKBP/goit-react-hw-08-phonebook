@@ -12,20 +12,17 @@ import { SignUpForm } from './pages/SignUpForm/SignUpForm';
 import { Contacts } from './pages/Contacts/Contacts';
 import { PublicRoute } from './AuthRoutes/PublicRoute';
 import { PrivateRoute } from './AuthRoutes/PrivateRoute';
+import { HomePage } from './pages/HomePage/HomePage';
 
 export const App = () => {
   return (
     <Main>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="" element={<PublicRoute />}>
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/sign-up" element={<SignUpForm />} />
-          </Route>
-
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/contacts" element={<Contacts />} />
-          </Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/sign-up" element={<SignUpForm />} />
+          <Route path="/contacts" element={<Contacts />} />
         </Route>
       </Routes>
     </Main>
@@ -57,3 +54,16 @@ App.propTypes = {
 //      </Route>
 //    </Routes>
 //  </Main>;
+
+//  <Routes>
+//    <Route path="" element={<Layout />}>
+//      <Route path="/" element={<PublicRoute />}>
+//        <Route path="/login" element={<LoginForm />} />
+//        <Route path="/sign-up" element={<SignUpForm />} />
+//      </Route>
+
+//      <Route path="" element={<PrivateRoute />}>
+//        <Route path="/contacts" element={<Contacts />} />
+//      </Route>
+//    </Route>
+//  </Routes>;
