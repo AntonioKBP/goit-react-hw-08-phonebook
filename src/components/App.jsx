@@ -11,7 +11,7 @@ import { LoginForm } from './pages/LoginForm/LoginForm';
 import { SignUpForm } from './pages/SignUpForm/SignUpForm';
 import { Contacts } from './pages/Contacts/Contacts';
 import { PublicRoute } from './AuthRoutes/PublicRoute';
-import { RestrictedRoute } from './AuthRoutes/RestrictedRoute';
+import { PrivateRoute } from './AuthRoutes/PrivateRoute';
 
 export const App = () => {
   return (
@@ -23,7 +23,7 @@ export const App = () => {
             <Route path="/sign-up" element={<SignUpForm />} />
           </Route>
 
-          <Route path="/" element={<RestrictedRoute />}>
+          <Route path="/" element={<PrivateRoute />}>
             <Route path="/contacts" element={<Contacts />} />
           </Route>
         </Route>
