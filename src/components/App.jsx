@@ -16,9 +16,8 @@ import { RestrictedRoute } from './AuthRoutes/RestrictedRoute';
 export const App = () => {
   return (
     <Main>
-      <Layout>
-        <Routes>
-          {/* <Route path="/" element={<Layout />}></Route> */}
+      <Routes>
+        <Route path="/" element={<Layout />}>
           <Route path="" element={<PublicRoute />}>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/sign-up" element={<SignUpForm />} />
@@ -27,8 +26,8 @@ export const App = () => {
           <Route path="/" element={<RestrictedRoute />}>
             <Route path="/contacts" element={<Contacts />} />
           </Route>
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </Main>
   );
 };
@@ -43,3 +42,18 @@ App.propTypes = {
   ),
   filter: PropTypes.string,
 };
+
+//  <Main>
+//    <Routes>
+//      <Route path="/" element={<Layout />}>
+//        <Route path="" element={<PublicRoute />}>
+//          <Route path="/login" element={<LoginForm />} />
+//          <Route path="/sign-up" element={<SignUpForm />} />
+//        </Route>
+
+//        <Route path="/" element={<RestrictedRoute />}>
+//          <Route path="/contacts" element={<Contacts />} />
+//        </Route>
+//      </Route>
+//    </Routes>
+//  </Main>;

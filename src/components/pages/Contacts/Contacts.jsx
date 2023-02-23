@@ -38,7 +38,7 @@ export const Contacts = () => {
 
   useEffect(() => {
     dispatch(getContactsThunk());
-  }, []);
+  }, [dispatch]);
 
   const addUser = data => {
     const findExistsName = contacts?.some(
