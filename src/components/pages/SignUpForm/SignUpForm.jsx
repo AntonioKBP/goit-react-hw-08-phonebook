@@ -28,7 +28,7 @@ export const SignUpForm = () => {
       await publicApi.post('/users/signup', values);
       setIsLoading(false);
       Notify.success('Success');
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       Notify.warning('Something went wrong');
     }
