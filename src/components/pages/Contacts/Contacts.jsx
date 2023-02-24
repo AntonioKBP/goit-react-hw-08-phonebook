@@ -3,7 +3,7 @@ import { Notify } from 'notiflix';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 import { contactsFilterAction } from 'redux/contacts/contacts.slice';
 
@@ -20,7 +20,7 @@ import { ContactList } from 'components/ContactList/ContactList';
 
 import {
   addContactsThunk,
-  getContactsThunk,
+  // getContactsThunk,
   deleteContactsThunk,
 } from 'redux/contacts/contacts.thunk';
 
@@ -36,9 +36,9 @@ export const Contacts = () => {
   const contacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectIsLoading);
 
-  useEffect(() => {
-    dispatch(getContactsThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getContactsThunk());
+  // }, [dispatch]);
 
   const addUser = data => {
     const findExistsName = contacts?.some(

@@ -74,7 +74,7 @@ export const LoginForm = () => {
           </button>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Login</button>
       </form>
     </>
   );
