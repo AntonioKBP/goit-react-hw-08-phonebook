@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Notify } from 'notiflix';
 import { publicApi } from 'components/http/http';
+import { useNavigate } from 'react-router-dom';
 
 const initState = {
   email: '',
@@ -12,6 +13,7 @@ export const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState(initState);
   const [isPsw, setIsPsw] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -26,6 +28,7 @@ export const SignUpForm = () => {
       await publicApi.post('/users/signup', values);
       setIsLoading(false);
       Notify.success('Success');
+      navigate('/');
     } catch (error) {
       Notify.warning('Something went wrong');
     }

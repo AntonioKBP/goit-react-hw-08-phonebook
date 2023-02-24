@@ -19,10 +19,15 @@ export const App = () => {
     <Main>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/sign-up" element={<SignUpForm />} />
-          <Route path="/contacts" element={<Contacts />} />
+          <Route path="" element={<PublicRoute />}>
+            <Route path="/" element={<HomePage />} />;
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/sign-up" element={<SignUpForm />} />
+          </Route>
+
+          <Route path="/" element={<PrivateRoute />}>
+            <Route path="/contacts" element={<Contacts />} />
+          </Route>
         </Route>
       </Routes>
     </Main>
@@ -54,6 +59,8 @@ App.propTypes = {
 //      </Route>
 //    </Routes>
 //  </Main>;
+
+//  <Route path="/" element={<HomePage />} />;
 
 //  <Routes>
 //    <Route path="" element={<Layout />}>

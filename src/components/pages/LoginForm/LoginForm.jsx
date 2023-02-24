@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Notify } from 'notiflix';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authLoginThunk } from 'redux/auth/auth.thunk';
-import { selectAuthLoading } from 'redux/auth/auth-selectors';
+// import { selectAuthLoading } from 'redux/auth/auth-selectors';
 import { useNavigate } from 'react-router-dom';
 
 const initState = {
@@ -16,9 +16,8 @@ export const LoginForm = () => {
   const [isPsw, setIsPsw] = useState(false);
 
   const dispatch = useDispatch();
-  const loading = useSelector(selectAuthLoading);
+  // const loading = useSelector(selectAuthLoading);
   const navigate = useNavigate();
-  console.log(loading);
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -32,7 +31,7 @@ export const LoginForm = () => {
       const { data } = await dispatch(authLoginThunk(values)).unwrap();
 
       Notify.success('Loginned successfuly');
-      navigate('/', { replace: true });
+      navigate('/contacts', { replace: true });
       setIsLoading(false);
     } catch (error) {
       Notify.warning('Wrong email or password');
@@ -42,8 +41,6 @@ export const LoginForm = () => {
   //   values.email = '';
   //   values.password = '';
   // };
-
-  console.log(values);
 
   return (
     <>
