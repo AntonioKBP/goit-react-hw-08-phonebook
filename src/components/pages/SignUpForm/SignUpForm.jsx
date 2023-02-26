@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Notify } from 'notiflix';
-import { publicApi } from 'components/http/http';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { registrationThunk } from 'redux/auth/auth.thunk';
+import css from './SignUpForm.module.css';
+import { Button } from './SignUpForm.styled';
 
 const initState = {
   email: '',
@@ -10,10 +11,10 @@ const initState = {
 };
 
 export const SignUpForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState(initState);
   const [isPsw, setIsPsw] = useState(false);
-  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -22,63 +23,73 @@ export const SignUpForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-
-    try {
-      setIsLoading(true);
-      await publicApi.post('/users/signup', values);
-      setIsLoading(false);
-      Notify.success('Success');
-      navigate('/login');
-    } catch (error) {
-      Notify.warning('Something went wrong');
-    }
+    dispatch(registrationThunk(values));
   };
 
   return (
     <>
       {' '}
-      {isLoading && <p>Loading</p>}
-      <form onSubmit={handleSubmit}>
-        <h1>Sign up page</h1>
+      <div className={css.container}>
+        {' '}
+        <form className={css.form} onSubmit={handleSubmit}>
+          <h2 className={css.title}>Sign up page</h2>
 
-        <div>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={values.name}
-            onChange={handleChange}
-          />
-          <label htmlFor="email">Name</label>
-        </div>
+          <div className={css.div}>
+            <label className={css.label} htmlFor="name">
+              Name
+            </label>
+            <input
+              className={css.input}
+              type="text"
+              id="name"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              placeholder="Enter Name"
+            />
+          </div>
 
-        <div>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-          />
-          <label htmlFor="email">Email</label>
-        </div>
+          <div className={css.div}>
+            <label className={css.label} htmlFor="email">
+              Email
+            </label>
+            <input
+              className={css.input}
+              id="email"
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              placeholder="Enter Email"
+            />
+          </div>
 
-        <div>
-          <input
-            id="password"
-            type={isPsw ? 'password' : 'text'}
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <button type="button" onClick={() => setIsPsw(prev => !prev)}>
-            show password
-          </button>
-        </div>
+          <div className={css.div}>
+            <label className={css.label} htmlFor="password">
+              Password
+            </label>
+            <input
+              className={css.input}
+              id="password"
+              type={isPsw ? 'password' : 'text'}
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              placeholder="Enter Password"
+            />
 
-        <button type="submit">Sign In</button>
-      </form>
+            <button
+              className={css.pswBtn}
+              type="button"
+              onClick={() => setIsPsw(prev => !prev)}
+            >
+              show password
+            </button>
+          </div>
+
+          <Button type="submit">Sign In</Button>
+        </form>
+      </div>
     </>
   );
 };

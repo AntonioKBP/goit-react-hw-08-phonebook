@@ -1,5 +1,3 @@
-// import { useEffect } from 'react';
-
 import PropTypes from 'prop-types';
 
 import { Route, Routes } from 'react-router-dom';
@@ -10,24 +8,48 @@ import Layout from './Layout/Layout';
 import { LoginForm } from './pages/LoginForm/LoginForm';
 import { SignUpForm } from './pages/SignUpForm/SignUpForm';
 import { Contacts } from './pages/Contacts/Contacts';
-import { PublicRoute } from './AuthRoutes/PublicRoute';
+import { RestrictedRoute } from './AuthRoutes/RestrictedRoute';
 import { PrivateRoute } from './AuthRoutes/PrivateRoute';
 import { HomePage } from './pages/HomePage/HomePage';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAuthToken } from 'redux/auth/auth-selectors';
+import { useEffect } from 'react';
+import { refreshUserThunk } from 'redux/auth/auth.thunk';
 
 export const App = () => {
+  const dispatch = useDispatch();
+  const token = useSelector(selectAuthToken);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(refreshUserThunk());
+    }
+  }, [dispatch, token]);
+
   return (
     <Main>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="" element={<PublicRoute />}>
-            <Route path="/" element={<HomePage />} />;
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/sign-up" element={<SignUpForm />} />
-          </Route>
-
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/contacts" element={<Contacts />} />
-          </Route>
+          <Route index element={<HomePage />} />;
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute component={LoginForm} redirectTo={'/contacts'} />
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <RestrictedRoute
+                component={SignUpForm}
+                redirectTo={'/contacts'}
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={<PrivateRoute component={Contacts} redirectTo={'/'} />}
+          />
         </Route>
       </Routes>
     </Main>

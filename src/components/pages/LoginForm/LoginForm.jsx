@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Notify } from 'notiflix';
 import { useDispatch } from 'react-redux';
-import { authLoginThunk } from 'redux/auth/auth.thunk';
-// import { selectAuthLoading } from 'redux/auth/auth-selectors';
+import { loginThunk } from 'redux/auth/auth.thunk';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../SignUpForm/SignUpForm.styled';
+
+import css from './LoginForm.module.css';
 
 const initState = {
   email: '',
@@ -11,7 +12,6 @@ const initState = {
 };
 
 export const LoginForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState(initState);
   const [isPsw, setIsPsw] = useState(false);
 
@@ -26,56 +26,60 @@ export const LoginForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    try {
-      // eslint-disable-next-line
-      const { data } = await dispatch(authLoginThunk(values)).unwrap();
-
-      Notify.success('Loginned successfuly');
-      navigate('/contacts', { replace: true });
-      setIsLoading(false);
-    } catch (error) {
-      Notify.warning('Wrong email or password');
-    }
+    dispatch(loginThunk(values));
+    navigate('/contacts', { replace: true });
   };
-  // const reset = () => {
-  //   values.email = '';
-  //   values.password = '';
-  // };
 
   return (
     <>
       {' '}
-      {isLoading && <p>Loading</p>}
-      <form onSubmit={handleSubmit}>
-        <h1>Login page</h1>
+      <div className={css.container}>
+        <form className={css.form} onSubmit={handleSubmit}>
+          <h2 className={css.title}>Login page</h2>
 
-        <div>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-          />
-          <label htmlFor="email">Email address</label>
-        </div>
+          <div className={css.div}>
+            <label className={css.label} htmlFor="email">
+              Email address
+            </label>
+            <input
+              className={css.input}
+              type="text"
+              id="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              placeholder="Enter Email"
+            />
+          </div>
 
-        <div>
-          <input
-            id="password"
-            type={isPsw ? 'password' : 'text'}
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <button type="button" onClick={() => setIsPsw(prev => !prev)}>
-            show password
-          </button>
-        </div>
+          <div className={css.div}>
+            <label className={css.label} htmlFor="password">
+              Password
+            </label>
+            <input
+              className={css.input}
+              id="password"
+              type={isPsw ? 'password' : 'text'}
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              placeholder="Enter Password"
+            />
 
-        <button type="submit">Login</button>
-      </form>
+            <button
+              className={css.pswBtn}
+              type="button"
+              onClick={() => setIsPsw(prev => !prev)}
+            >
+              show password
+            </button>
+          </div>
+
+          <Button className={css.button} type="submit">
+            Login
+          </Button>
+        </form>
+      </div>
     </>
   );
 };
