@@ -1,5 +1,3 @@
-import storage from 'redux-persist/lib/storage';
-
 import { createSlice } from '@reduxjs/toolkit';
 import { authInitState } from './auth.init-state';
 // import {
