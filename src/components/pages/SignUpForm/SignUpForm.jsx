@@ -4,26 +4,50 @@ import { registrationThunk } from 'redux/auth/auth.thunk';
 import css from './SignUpForm.module.css';
 import { Button } from './SignUpForm.styled';
 
-const initState = {
-  email: '',
-  name: '',
-  password: '',
-};
+// const initState = {
+//   email: '',
+//   name: '',
+//   password: '',
+// };
 
 export const SignUpForm = () => {
-  const [values, setValues] = useState(initState);
+  // const [values, setValues] = useState(initState);
   const [isPsw, setIsPsw] = useState(false);
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
 
-  const handleChange = e => {
-    const { value, name } = e.target;
-    setValues(prev => ({ ...prev, [name]: value }));
+  // const handleChange = e => {
+  //   const { value, name } = e.target;
+  //   setValues(prev => ({ ...prev, [name]: value }));
+  // };
+
+  const onInputChange = event => {
+    switch (event.target.name) {
+      case 'name':
+        setName(event.target.value);
+        break;
+      case 'email':
+        setEmail(event.target.value);
+        break;
+      case 'password':
+        setPassword(event.target.value);
+        break;
+      default:
+        return;
+    }
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(registrationThunk(values));
+    dispatch(registrationThunk({ name, email, password }));
+
+    setName('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -43,8 +67,8 @@ export const SignUpForm = () => {
               type="text"
               id="name"
               name="name"
-              value={values.name}
-              onChange={handleChange}
+              value={name}
+              onChange={onInputChange}
               placeholder="Enter Name"
             />
           </div>
@@ -58,8 +82,8 @@ export const SignUpForm = () => {
               id="email"
               type="email"
               name="email"
-              value={values.email}
-              onChange={handleChange}
+              value={email}
+              onChange={onInputChange}
               placeholder="Enter Email"
             />
           </div>
@@ -73,8 +97,8 @@ export const SignUpForm = () => {
               id="password"
               type={isPsw ? 'password' : 'text'}
               name="password"
-              value={values.password}
-              onChange={handleChange}
+              value={password}
+              onChange={onInputChange}
               placeholder="Enter Password"
             />
 
