@@ -32,8 +32,9 @@ export const AppBar = () => {
             </HeaderNavBtn>
           ) : (
             <>
-              <AuthBtn to="/login">Login</AuthBtn>
+              <AuthBtn to="/">Home</AuthBtn>
               <AuthBtn to="/signin">Sign In</AuthBtn>
+              <AuthBtn to="/login">Login</AuthBtn>
             </>
           )}
         </HeaderNav>

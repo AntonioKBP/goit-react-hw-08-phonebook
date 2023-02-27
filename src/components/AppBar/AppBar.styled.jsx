@@ -62,7 +62,7 @@ export const HeaderTitle = styled.h2`
   margin: 0;
 `;
 
-export const HeaderNavBtn = styled.button`
+export const HeaderNavBtn = styled.a`
   background-color: #e1ecf4;
   border-radius: 15px;
   border: 1px solid #7aa7c7;

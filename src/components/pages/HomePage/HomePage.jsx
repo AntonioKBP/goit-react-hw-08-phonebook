@@ -5,6 +5,7 @@ import {
 } from 'redux/auth/auth-selectors';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { HeaderNavBtn } from 'components/AppBar/AppBar.styled';
 
 export const HomePage = () => {
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
