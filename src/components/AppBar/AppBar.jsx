@@ -4,7 +4,14 @@ import {
   selectAuthName,
 } from 'redux/auth/auth-selectors';
 
-import { Header, HeaderWrapper, NaviLink } from './AppBar.styled';
+import {
+  Header,
+  HeaderWrapper,
+  HeaderTitle,
+  HeaderNavBtn,
+  HeaderNav,
+  AuthBtn,
+} from './AppBar.styled';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -18,17 +25,19 @@ export const AppBar = () => {
   return (
     <Header>
       <HeaderWrapper>
-        <nav>
+        <HeaderNav>
           {isLoggedIn ? (
-            <button onClick={() => dispatch(logoutThunk())}>LogOut</button>
+            <HeaderNavBtn onClick={() => dispatch(logoutThunk())}>
+              LogOut
+            </HeaderNavBtn>
           ) : (
             <>
-              <NaviLink to="/login">Login</NaviLink>
-              <NaviLink to="/signin">Sign In</NaviLink>
+              <AuthBtn to="/login">Login</AuthBtn>
+              <AuthBtn to="/signin">Sign In</AuthBtn>
             </>
           )}
-        </nav>
-        {isLoggedIn && <p>Hello {name}</p>}
+        </HeaderNav>
+        {isLoggedIn && <HeaderTitle>Hello {name}</HeaderTitle>}
       </HeaderWrapper>
     </Header>
   );
