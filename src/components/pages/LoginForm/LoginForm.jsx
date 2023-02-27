@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/auth/auth.thunk';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '../SignUpForm/SignUpForm.styled';
 
 import css from './LoginForm.module.css';
@@ -17,7 +16,6 @@ export const LoginForm = () => {
 
   const dispatch = useDispatch();
   // const loading = useSelector(selectAuthLoading);
-  const navigate = useNavigate();
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -27,7 +25,6 @@ export const LoginForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     dispatch(loginThunk(values));
-    navigate('/contacts', { replace: true });
   };
 
   return (
